@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
+import { useTodoContext } from '../store/TodoContext';
 import Button from './UI/Button/Button';
 
-const AddTodo = ({add,state}) => {
+const AddTodo = () => {
     const [text, setText] = useState("");
+    const {add,counter} = useTodoContext()
     const enabled = text.trim().length > 0 ;
     return (
       <div className="AddTodo">
         <AddInput value={text} onChange={e => setText(e.target.value)} className="AddTodoInput" />
         <Button disabled={!enabled} className="AddTodoButton" onClick={() => {add(text); setText("")}}>Add</Button>
-        <AmountTodoText>The amount of Todos: {state.counter} </AmountTodoText>
+        <AmountTodoText>The amount of Todos: {counter} </AmountTodoText>
       </div>
     );
   }
